@@ -38,6 +38,7 @@ version_control/autoload_on_startup=true
 2d_physics/layer_2="PlayerCollisions"
 2d_physics/layer_3="Player"
 2d_physics/layer_4="Rotateing"
+2d_physics/layer_5="Enemies"
 
 [physics]
 

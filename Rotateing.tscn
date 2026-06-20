@@ -2,8 +2,23 @@
 
 [ext_resource type="Script" uid="uid://p6byttyd8fas" path="res://Rotateing.gd" id="1_o2si4"]
 
+[sub_resource type="Gradient" id="Gradient_85ky6"]
+offsets = PackedFloat32Array(0.6534678, 0.71942466)
+colors = PackedColorArray(0.96862745, 0.15294118, 0, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_01lti"]
+gradient = SubResource("Gradient_85ky6")
+width = 20
+height = 20
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0, 0)
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_xhfnw"]
 radius = 10.049875
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_o2si4"]
+radius = 15.0
 
 [node name="Rotateing" type="RigidBody2D" unique_id=993906565]
 collision_layer = 8
@@ -15,17 +30,36 @@ linear_damp = 0.8
 script = ExtResource("1_o2si4")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1520944482]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_right = 20.0
-offset_bottom = 20.0
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 0, 0, 1)
 
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=995846967]
+texture = SubResource("GradientTexture2D_01lti")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1908345422]
-position = Vector2(10, 10)
 shape = SubResource("CircleShape2D_xhfnw")
+
+[node name="DamageArea" type="Area2D" parent="." unique_id=2101764517]
+collision_layer = 0
+collision_mask = 16
+
+[node name="DamageShape" type="CollisionShape2D" parent="DamageArea" unique_id=1703890921]
+visible = false
+shape = SubResource("CircleShape2D_o2si4")
+disabled = true
+
+[node name="ShapeCast2D" type="ShapeCast2D" parent="DamageArea" unique_id=541898471]
+shape = SubResource("CircleShape2D_o2si4")
+margin = 2.0
+collision_mask = 16

@@ -10,6 +10,12 @@ size = Vector2(40, 40)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_01lti"]
 size = Vector2(39, 248)
 
+[sub_resource type="Curve2D" id="Curve2D_feb5d"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1403.6473, -875.4093, 0, 0, 0, 0, 1419.0632, 796.1011, 0, 0, 0, 0, -1532.1023, 778.2144, 0, 0, 0, 0, -1534.0293, -894.1903, 0, 0, 0, 0, 1398.83, -881.6697)
+}
+point_count = 5
+
 [node name="Game" type="Node2D" unique_id=1066861215]
 script = ExtResource("1_feb5d")
 
@@ -24,39 +30,57 @@ anker = NodePath("../Player")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1015059002]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1335870316]
-position = Vector2(-327, 311)
-collision_layer = 10
-collision_mask = 10
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=511222163]
-position = Vector2(20, 20)
-shape = SubResource("RectangleShape2D_o2si4")
-
-[node name="TestRect" type="ColorRect" parent="StaticBody2D" unique_id=612328068]
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="StaticBody2D2" type="StaticBody2D" parent="." unique_id=834249014]
-position = Vector2(-326, 375)
-collision_layer = 10
-collision_mask = 10
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2" unique_id=1013950006]
-position = Vector2(19.5, 124)
-shape = SubResource("RectangleShape2D_01lti")
-
-[node name="TestRect" type="ColorRect" parent="StaticBody2D2" unique_id=1951146451]
-offset_right = 39.0
-offset_bottom = 249.0
-
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1781400831]
 zoom = Vector2(0.5, 0.5)
 
-[node name="DampedSpringJoint2D" type="DampedSpringJoint2D" parent="." unique_id=1845683973]
-node_a = NodePath("../Player")
-bias = 0.9
-length = 1.0
-rest_length = 63.0
-stiffness = 24.3
-damping = 0.05
+[node name="Level" type="Node2D" parent="." unique_id=1336884311]
+
+[node name="TestCollisions" type="Node2D" parent="Level" unique_id=116089207]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Level/TestCollisions" unique_id=1335870316]
+position = Vector2(-327, 311)
+collision_layer = 10
+collision_mask = 26
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/TestCollisions/StaticBody2D" unique_id=511222163]
+position = Vector2(20, 20)
+shape = SubResource("RectangleShape2D_o2si4")
+
+[node name="TestRect" type="ColorRect" parent="Level/TestCollisions/StaticBody2D" unique_id=612328068]
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Level/TestCollisions" unique_id=834249014]
+position = Vector2(-326, 375)
+collision_layer = 26
+collision_mask = 26
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/TestCollisions/StaticBody2D2" unique_id=1013950006]
+position = Vector2(19.5, 124)
+shape = SubResource("RectangleShape2D_01lti")
+
+[node name="TestRect" type="ColorRect" parent="Level/TestCollisions/StaticBody2D2" unique_id=1951146451]
+offset_right = 39.0
+offset_bottom = 249.0
+
+[node name="Node2D" type="Node2D" parent="Level" unique_id=34913611]
+
+[node name="Enemies" type="Node2D" parent="." unique_id=1876228398]
+unique_name_in_owner = true
+
+[node name="SpawnLine" type="Path2D" parent="." unique_id=726953029]
+position = Vector2(68.095795, 54.69876)
+scale = Vector2(1.0541492, 1.0643134)
+curve = SubResource("Curve2D_feb5d")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="SpawnLine" unique_id=1338664122]
+unique_name_in_owner = true
+position = Vector2(1403.6473, -875.4093)
+rotation = 1.5615739
+
+[node name="enemySpawnTimer" type="Timer" parent="." unique_id=1273448567]
+unique_name_in_owner = true
+wait_time = 3.0
+
+[connection signal="timeout" from="enemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]
