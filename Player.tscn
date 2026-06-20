@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://3fp543f3angf"]
 
 [ext_resource type="Script" uid="uid://cnpt3l4hkdgor" path="res://player.gd" id="1_xhfnw"]
+[ext_resource type="PackedScene" uid="uid://nueuwd3wfkvd" path="res://Parts/health_bar.tscn" id="2_kpjcp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_01lti"]
 size = Vector2(40, 40)
@@ -35,17 +36,9 @@ color = Color(0, 0, 1, 1)
 [node name="AudioListener2D" type="AudioListener2D" parent="." unique_id=1724029088]
 current = true
 
-[node name="HealthBar" type="ProgressBar" parent="." unique_id=698485722]
-offset_left = -35.0
-offset_top = -40.0
-offset_right = 35.0
-offset_bottom = -25.0
-value = 100.0
-show_percentage = false
-
-[node name="Timer" type="Timer" parent="HealthBar" unique_id=1063977865]
-wait_time = 3.0
-one_shot = true
+[node name="HealthBar" parent="." unique_id=568718901 node_paths=PackedStringArray("parent") instance=ExtResource("2_kpjcp")]
+parent = NodePath("..")
+barColor = Color(0, 0.4745098, 0, 1)
 
 [node name="HurtArea" type="Area2D" parent="." unique_id=1318805703]
 unique_name_in_owner = true
@@ -54,5 +47,3 @@ collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtArea" unique_id=887958220]
 shape = SubResource("CapsuleShape2D_01lti")
-
-[connection signal="timeout" from="HealthBar/Timer" to="." method="_on_timer_timeout"]

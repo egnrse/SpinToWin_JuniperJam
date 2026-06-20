@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://nueuwd3wfkvd"]
+
+[ext_resource type="Script" uid="uid://b3xwyjlh33o50" path="res://Parts/health_bar.gd" id="1_dhxi6"]
+
+[node name="HealthBar" type="ProgressBar" unique_id=568718901]
+offset_left = -35.0
+offset_top = -40.0
+offset_right = 35.0
+offset_bottom = -25.0
+value = 100.0
+show_percentage = false
+script = ExtResource("1_dhxi6")
+
+[node name="Timer" type="Timer" parent="." unique_id=840814348]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

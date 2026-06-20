@@ -5,6 +5,8 @@ extends CharacterBody2D
 @onready var Player = get_node("/root/Game/Player")
 @onready var Game = get_node("/root/Game/")
 
+@onready var healthBar = get_node_or_null("HealthBar") ## the healthbar of [member self] (fails silently if none exist)
+
 signal damaged(entity, amount:int)		## emited when [member self] is damaged
 signal death(entity,position:Vector2)	## emited when [member self] dies
 
@@ -26,12 +28,14 @@ func _process(_delta: float) -> void:
 func init() -> void:
 	health = max_health
 	alive = true
+	if healthBar: healthBar.update()
 
 ## call to damage [member self] (decreases [member health])
 func damage(amount: int = 1) -> void:
-	print("damage: ", amount)	#dev
+	#print("damage: ", amount)	#dev
 	self.health -=amount
 	damaged.emit(self, amount)
+	if healthBar: healthBar.update()
 	
 	if health <= 0:
 		self.die()

@@ -7,15 +7,13 @@ signal playerDeath	## called when the player dies
 var health := max_health		## current health
 
 @onready var healthBar = $HealthBar
-@onready var healthBarTimer = $HealthBar/Timer
-
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	health = max_health
-	healthBar.max_value = max_health
-	healthBar.value = health
-	healthShow()
+	#healthBar.max_value = max_health
+	#healthBar.value = health
+	healthBar.update()
 
 func _physics_process(delta: float) -> void:
 	# follow mouse
@@ -31,16 +29,7 @@ func _physics_process(delta: float) -> void:
 ## call to damage [member self] (decreases [member health])
 func damage(amount: float = 1) -> void:
 	self.health -=amount
-	healthShow()
+	healthBar.update()
 	
 	if health <= 0:
 		playerDeath.emit()
-
-func healthShow() -> void:
-	healthBar.visible = true
-	healthBar.value = health
-	healthBarTimer.start()
-
-# hide the healthbar if nothing changes on it
-func _on_timer_timeout() -> void:
-	healthBar.visible = false
