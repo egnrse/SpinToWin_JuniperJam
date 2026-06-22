@@ -38,3 +38,7 @@ func damage(amount: float = 1) -> void:
 	if health <= 0:
 		$DeathAudio.play()
 		playerDeath.emit()
+	else:
+		var hurtAudio = $HurtAudio
+		if not hurtAudio.playing:
+			hurtAudio.play()

@@ -90,9 +90,6 @@ func _on_restart_delay_timeout() -> void:
 	startable = true
 
 # Music
-func _on_music_intro_finished() -> void:
-	$MusicLoop.playing = true
-
 func _on_music_hslider_drag_ended(_value_changed: bool) -> void:
 	AudioServer.set_bus_volume_linear(musicAudioBus, musicSlider.value)
 func _on_sfx_hslider_drag_ended(_value_changed: bool) -> void:

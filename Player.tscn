@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cnpt3l4hkdgor" path="res://player.gd" id="1_xhfnw"]
 [ext_resource type="PackedScene" uid="uid://nueuwd3wfkvd" path="res://Parts/health_bar.tscn" id="2_kpjcp"]
 [ext_resource type="AudioStream" uid="uid://b4xw6fkroigc8" path="res://Assets/Player_DeathV1.wav" id="3_kne1u"]
+[ext_resource type="AudioStream" uid="uid://byql7vmxpm4k7" path="res://Assets/young-man-being-hurt_short.mp3" id="4_e80uo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_01lti"]
 size = Vector2(40, 40)
@@ -53,4 +54,10 @@ shape = SubResource("CapsuleShape2D_01lti")
 process_mode = 3
 stream = ExtResource("3_kne1u")
 volume_db = -13.379
+bus = &"SFX"
+
+[node name="HurtAudio" type="AudioStreamPlayer2D" parent="." unique_id=106676487]
+process_mode = 3
+stream = ExtResource("4_e80uo")
+volume_db = -20.0
 bus = &"SFX"
