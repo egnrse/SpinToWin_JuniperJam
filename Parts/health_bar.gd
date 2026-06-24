@@ -18,8 +18,10 @@ func _ready() -> void:
 
 ## call this update and to show the bar
 func update() -> void:
-	#self.value = parent.health
-	anim_update()
+	if "animate" in parent and not parent.animate: 
+		self.value = parent.health
+	else:
+		anim_update()
 	self.visible = true
 	$Timer.start()
 

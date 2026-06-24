@@ -16,6 +16,7 @@ signal death(entity,position:Vector2)	## emited when [member self] dies
 
 @export_subgroup("more")
 @export var INVUL_TIME := 0.1;		## invulnerability time between damage instances (see [member iTimer])
+@export var animate := true			## if animations should be shown
 
 var health := max_health			## current health
 var alive := true					## if [member self] is currently alive
@@ -97,18 +98,21 @@ func die() -> void:
 		return
 	alive = false
 	#self.visible = false	# deprecated, use anim_die
+	# disable collisions
+	collision_layer = 0
+	collision_mask = 0
 	death.emit(self, self.global_position)
 	# play audio (and wait for it to finish)
 	audioDie.pitch_scale = randf_range(1-audioDiePitchRange, 1+audioDiePitchRange)
 	audioDie.play()
 	await anim_die()
-	#await audioDie.finished
+	await audioDie.finished
 	
 	queue_free()
 
 #region ANIMATIONS
 func anim_damage(amount: int = 1) -> void:
-	if not look: return
+	if not look or not animate: return
 	if animTween: animTween.kill()
 	animTween = create_tween()
 	animTween.set_trans(Tween.TRANS_EXPO)
@@ -119,7 +123,7 @@ func anim_damage(amount: int = 1) -> void:
 	animTween.tween_property(look, "scale", o, 0.03)
 	await animTween.finished
 func anim_die() -> void:
-	if not look: return
+	if not look or not animate: return
 	if animTween: animTween.kill()
 	animTween = create_tween()
 	animTween.set_trans(Tween.TRANS_SINE)

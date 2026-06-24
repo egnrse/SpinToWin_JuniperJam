@@ -31,6 +31,40 @@ continuous_cd = 1
 linear_damp = 0.8
 script = ExtResource("1_o2si4")
 
+[node name="Particles" type="Node2D" parent="." unique_id=368498437]
+
+[node name="Speed" type="CPUParticles2D" parent="Particles" unique_id=2121641759]
+emitting = false
+lifetime = 0.3
+speed_scale = 3.0
+emission_shape = 1
+emission_sphere_radius = 15.0
+direction = Vector2(-1, 0)
+spread = 5.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 130.0
+scale_amount_min = 4.0
+scale_amount_max = 8.0
+color = Color(1, 0.003921569, 0, 0.47058824)
+
+[node name="Damage" type="CPUParticles2D" parent="Particles" unique_id=1657829871]
+z_as_relative = false
+emitting = false
+lifetime = 0.5
+one_shot = true
+speed_scale = 1.5
+explosiveness = 0.67
+emission_shape = 1
+emission_sphere_radius = 15.0
+spread = 20.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 120.0
+initial_velocity_max = 120.0
+scale_amount_min = 4.0
+scale_amount_max = 10.0
+color = Color(0.35563263, 0.38640738, 1, 0.49803922)
+
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1520944482]
 visible = false
 anchors_preset = 8

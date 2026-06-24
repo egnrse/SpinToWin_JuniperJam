@@ -33,7 +33,7 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 1, 1)
+color = Color(0.19607843, 0.09411765, 0.90588236, 1)
 
 [node name="AudioListener2D" type="AudioListener2D" parent="." unique_id=1724029088]
 current = true
@@ -61,3 +61,23 @@ process_mode = 3
 stream = ExtResource("4_e80uo")
 volume_db = -20.0
 bus = &"SFX"
+
+[node name="DeathParticles" type="CPUParticles2D" parent="." unique_id=977980252]
+process_mode = 3
+emitting = false
+amount = 15
+lifetime = 20.0
+one_shot = true
+speed_scale = 0.5
+explosiveness = 1.0
+fixed_fps = 20
+fract_delta = false
+emission_shape = 3
+emission_rect_extents = Vector2(30, 30)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 30.0
+scale_amount_min = 8.0
+scale_amount_max = 12.0
+color = Color(0.22352941, 0.09411765, 0.76862746, 1)

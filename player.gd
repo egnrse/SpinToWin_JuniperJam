@@ -6,7 +6,11 @@ signal playerDeath	## called when the player dies
 @export var max_health := 10.	## max health
 var health := max_health		## current health
 
+@export_subgroup("more")
+@export var animate := true				## if animations should be shown
+
 @onready var healthBar = $HealthBar
+@onready var deathPart = $DeathParticles
 
 func _ready():
 	reset()
@@ -36,14 +40,23 @@ func damage(amount: float = 1) -> void:
 	healthBar.update()
 	
 	if health <= 0:
-		$DeathAudio.play()
-		playerDeath.emit()
+		die()
 	else:
 		var hurtAudio = $HurtAudio
 		if not hurtAudio.playing:
 			hurtAudio.play()
 
+func die() -> void:
+	$DeathAudio.play()
+	if animate:
+		deathPart.visible = true
+		deathPart.emitting = true
+	playerDeath.emit()
+
 ## reset everything
 func reset() -> void:
 	health = max_health
 	healthBar.update()
+	deathPart.visible = false
+	if animate:
+		deathPart.restart()

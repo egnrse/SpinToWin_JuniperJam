@@ -80,6 +80,7 @@ position = Vector2(1403.6473, -875.4093)
 rotation = 1.5615739
 
 [node name="Rotateing" parent="." unique_id=993906565 node_paths=PackedStringArray("anker") instance=ExtResource("2_e2o6t")]
+position = Vector2(-68, 7)
 linear_damp = 1.5
 angular_velocity = 0.34906584
 angular_damp = 20.0
@@ -215,8 +216,8 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -200.0
-offset_top = -50.0
+offset_left = -158.0
+offset_top = -125.0
 grow_horizontal = 0
 grow_vertical = 0
 
@@ -224,11 +225,24 @@ grow_vertical = 0
 layout_mode = 2
 
 [node name="Label" type="Label" parent="UI/Settings_PanelContainer/VBoxContainer" unique_id=1791613726]
-visible = false
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
 text = "Settings"
 horizontal_alignment = 1
 uppercase = true
+
+[node name="HSeparator" type="HSeparator" parent="UI/Settings_PanelContainer/VBoxContainer" unique_id=1929166179]
+layout_mode = 2
+
+[node name="SFX_HBoxContainer3" type="HBoxContainer" parent="UI/Settings_PanelContainer/VBoxContainer" unique_id=217408437]
+layout_mode = 2
+
+[node name="AnimateCheckBox" type="CheckBox" parent="UI/Settings_PanelContainer/VBoxContainer/SFX_HBoxContainer3" unique_id=977202607]
+layout_mode = 2
+button_pressed = true
+text = "Animations"
 
 [node name="Music_HBoxContainer" type="HBoxContainer" parent="UI/Settings_PanelContainer/VBoxContainer" unique_id=513758592]
 layout_mode = 2
@@ -276,5 +290,6 @@ bus = &"Music"
 [connection signal="timeout" from="Enemies/spawnTimeTimer" to="." method="_on_spawn_time_timer_timeout"]
 [connection signal="playerDeath" from="Player" to="." method="_on_player_player_death"]
 [connection signal="timeout" from="UI/GameOver/RestartDelay" to="." method="_on_restart_delay_timeout"]
+[connection signal="toggled" from="UI/Settings_PanelContainer/VBoxContainer/SFX_HBoxContainer3/AnimateCheckBox" to="." method="_on_animate_check_box_toggled"]
 [connection signal="drag_ended" from="UI/Settings_PanelContainer/VBoxContainer/Music_HBoxContainer/Music_HSlider" to="." method="_on_music_hslider_drag_ended"]
 [connection signal="drag_ended" from="UI/Settings_PanelContainer/VBoxContainer/SFX_HBoxContainer2/SFX_HSlider" to="." method="_on_sfx_hslider_drag_ended"]

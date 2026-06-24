@@ -28,6 +28,7 @@ var musicHPIdx = 2
 @onready var musicHP = AudioServer.get_bus_effect(musicAudioBus, musicHPIdx) as AudioEffectFilter
 
 #
+@export var animate := true			## if animations should be shown
 var animTween: Tween
 var pauseTween: Tween
 @onready var camera = $Camera2D
@@ -68,6 +69,7 @@ func gameStart(force:bool = false) -> bool:
 	%Settings_PanelContainer.visible = false
 	
 	# prepare
+	updateAnimate()
 	score = 0
 	scoreUI.text = str(score)
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
@@ -129,7 +131,16 @@ func spawn_enemy(type="res://enemies/enemy_melee.tscn") -> void:
 	%PathFollow2D.progress_ratio = randValue
 	enemy.global_position = %PathFollow2D.global_position
 	enemy.death.connect(_on_enemy_death)
+	if 'animate' in enemy: enemy.animate = animate
 	enemyContainer.add_child(enemy)
+
+## update the animate value of some children
+func updateAnimate() -> void:
+	player.animate = animate
+	rot.animate = animate
+	for e in enemyContainer.get_children():
+		if "animate" in e:
+			e.animate = animate
 #endregion HELPER
 
 #region SIGNALS
@@ -181,6 +192,11 @@ func anim_death() -> void:
 ## force wait timer before allowing to restart
 func _on_restart_delay_timeout() -> void:
 	startable = true
+
+func _on_animate_check_box_toggled(toggled_on: bool) -> void:
+	animate = toggled_on
+	updateAnimate()
+	pass # Replace with function body.
 #endregion SIGNALS
 
 #region AUDIO
