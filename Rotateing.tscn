@@ -1,6 +1,17 @@
 [gd_scene format=4 uid="uid://b8pne1op3m2sy"]
 
 [ext_resource type="Script" uid="uid://p6byttyd8fas" path="res://Rotateing.gd" id="1_o2si4"]
+[ext_resource type="Texture2D" uid="uid://cf81ggb2qhr75" path="res://Assets/sprites/loose sprites/part-weapon_moon1.png" id="2_kuvoo"]
+[ext_resource type="Texture2D" uid="uid://bvknysvel2eg3" path="res://Assets/sprites/loose sprites/part-weapon_moon2.png" id="3_6m1jg"]
+[ext_resource type="Texture2D" uid="uid://dmc1gqla32gtr" path="res://Assets/sprites/loose sprites/part-weapon_moon3.png" id="4_bgaql"]
+[ext_resource type="Texture2D" uid="uid://dcsd01jwyi26e" path="res://Assets/sprites/loose sprites/part-weapon_moon4.png" id="5_7e6w6"]
+[ext_resource type="Texture2D" uid="uid://dmquh06pcvtyv" path="res://Assets/sprites/loose sprites/part-weapon_moon5.png" id="6_0gbfc"]
+[ext_resource type="Texture2D" uid="uid://tfwnn8wx387j" path="res://Assets/sprites/loose sprites/part-weapon_moon6.png" id="7_ldme7"]
+[ext_resource type="Texture2D" uid="uid://bkavdakdx4f5m" path="res://Assets/sprites/loose sprites/part-weapon_moon7.png" id="8_w3yfn"]
+[ext_resource type="Texture2D" uid="uid://c20loqbdcwtw1" path="res://Assets/sprites/loose sprites/part-weapon_moon8.png" id="9_usa7h"]
+[ext_resource type="Texture2D" uid="uid://bhjbbkv27q36h" path="res://Assets/sprites/loose sprites/part-weapon_moon9.png" id="10_5luun"]
+[ext_resource type="Texture2D" uid="uid://brqlv1xhjhuv0" path="res://Assets/sprites/loose sprites/part-weapon_moon10.png" id="11_m8c6u"]
+[ext_resource type="Texture2D" uid="uid://cibv6tx07t4ud" path="res://Assets/sprites/loose sprites/part-weapon_moon11.png" id="12_phd6f"]
 
 [sub_resource type="Gradient" id="Gradient_85ky6"]
 offsets = PackedFloat32Array(0.6534678, 0.71942466)
@@ -13,6 +24,47 @@ height = 20
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0, 0)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_01lti"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_kuvoo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_6m1jg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_bgaql")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_7e6w6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_0gbfc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_ldme7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_w3yfn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_usa7h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_5luun")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_m8c6u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_phd6f")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 10.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xhfnw"]
 radius = 10.049875
@@ -55,7 +107,7 @@ initial_velocity_min = 100.0
 initial_velocity_max = 130.0
 scale_amount_min = 4.0
 scale_amount_max = 8.0
-color = Color(1, 0.003921569, 0, 0.47058824)
+color = Color(0.60784316, 0.6784314, 0.7176471, 0.59607846)
 
 [node name="Damage" type="CPUParticles2D" parent="Particles" unique_id=1657829871]
 z_as_relative = false
@@ -72,7 +124,7 @@ initial_velocity_min = 120.0
 initial_velocity_max = 120.0
 scale_amount_min = 4.0
 scale_amount_max = 10.0
-color = Color(0.35563263, 0.38640738, 1, 0.49803922)
+color = Color(0.6745098, 0.19607843, 0.19607843, 0.65882355)
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1520944482]
 visible = false
@@ -90,7 +142,22 @@ grow_vertical = 2
 color = Color(1, 0, 0, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=995846967]
+visible = false
 texture = SubResource("GradientTexture2D_01lti")
+
+[node name="AnimatedSpriteContainer" type="Node2D" parent="." unique_id=1533002365]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="AnimatedSpriteContainer" unique_id=91769385]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_01lti")
+autoplay = "default"
+
+[node name="AnimatedSprite2D_line" type="AnimatedSprite2D" parent="AnimatedSpriteContainer" unique_id=814410023]
+visible = false
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_01lti")
+autoplay = "default"
+frame_progress = 0.7411104
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1908345422]
 shape = SubResource("CircleShape2D_xhfnw")

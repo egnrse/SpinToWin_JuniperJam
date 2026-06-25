@@ -10,7 +10,11 @@ var health := max_health		## current health
 @export var animate := true				## if animations should be shown
 
 @onready var healthBar = $HealthBar
-@onready var deathPart = $DeathParticles
+@onready var deathNode = $Death
+#@onready var deathPart = $Death/DeathParticles
+#@onready var deathAudio = $Death/DeathAudio
+@onready var animatedSprite = $AnimatedSprite2D_png
+@onready var animatedTimer = $AnimatedSprite2D_png/Timer
 
 func _ready():
 	reset()
@@ -45,18 +49,40 @@ func damage(amount: float = 1) -> void:
 		var hurtAudio = $HurtAudio
 		if not hurtAudio.playing:
 			hurtAudio.play()
+		if animate:
+			var frame = animatedSprite.frame
+			var progress = animatedSprite.frame_progress
+			animatedSprite.animation = "hit"
+			animatedSprite.set_frame_and_progress(frame, progress)
+			animatedTimer.start()
 
 func die() -> void:
-	$DeathAudio.play()
-	if animate:
-		deathPart.visible = true
-		deathPart.emitting = true
+	deathNode.start(animate)
 	playerDeath.emit()
 
 ## reset everything
 func reset() -> void:
 	health = max_health
 	healthBar.update()
-	deathPart.visible = false
 	if animate:
-		deathPart.restart()
+		animatedSprite.play("default")
+	else:
+		animatedSprite.stop()
+	deathNode.reset()
+
+## update animations (react to a change in the [member animate])
+func animateUpdate() -> void:
+	if animate:
+		if not animatedSprite.is_playing():
+			animatedSprite.play("default")
+	else:
+		animatedSprite.stop()
+
+## reset animation to default
+func _on_timer_timeout() -> void:
+	animatedSprite.animation = "default"
+	pass # Replace with function body.
+
+func _on_animated_sprite_2d_png_animation_finished() -> void:
+	animatedSprite.stop()
+	pass # Replace with function body.

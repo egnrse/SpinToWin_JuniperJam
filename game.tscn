@@ -3,6 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://3fp543f3angf" path="res://Player.tscn" id="1_80nbo"]
 [ext_resource type="Script" uid="uid://dbhgx2smnvpbk" path="res://game.gd" id="1_feb5d"]
 [ext_resource type="PackedScene" uid="uid://b8pne1op3m2sy" path="res://Rotateing.tscn" id="2_e2o6t"]
+[ext_resource type="Texture2D" uid="uid://0apg8ui2wxku" path="res://Assets/BackgroundV1.jpg" id="2_eow3j"]
+[ext_resource type="Texture2D" uid="uid://bvy6lagohvlet" path="res://Assets/Space Background_Coffee.png" id="3_j5wjh"]
 [ext_resource type="Script" uid="uid://d0cswqqdagfvj" path="res://UI.gd" id="4_fc0e3"]
 [ext_resource type="Theme" uid="uid://d3if7f4ih42v2" path="res://Assets/labelTheme.tres" id="5_eow3j"]
 [ext_resource type="AudioStream" uid="uid://cul5kyfur3ex7" path="res://Assets/Music/SpinToWin_MusicV2.mp3" id="6_j5wjh"]
@@ -15,7 +17,7 @@ size = Vector2(39, 248)
 
 [sub_resource type="Curve2D" id="Curve2D_feb5d"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 1403.6473, -875.4093, 0, 0, 0, 0, 1419.0632, 796.1011, 0, 0, 0, 0, -1532.1023, 778.2144, 0, 0, 0, 0, -1534.0293, -894.1903, 0, 0, 0, 0, 1398.83, -881.6697)
+"points": PackedVector2Array(0, 0, 0, 0, 1403.6473, -875.4093, 0, 0, 0, 0, 1419.0632, 796.1011, 0, 0, 0, 0, -1605.4316, 828.97156, 0, 0, 0, 0, -1534.0293, -894.1903, 0, 0, 0, 0, 1398.83, -881.6697)
 }
 point_count = 5
 
@@ -23,6 +25,31 @@ point_count = 5
 script = ExtResource("1_feb5d")
 
 [node name="Level" type="Node2D" parent="." unique_id=1336884311]
+
+[node name="Background" type="Node2D" parent="Level" unique_id=1962991511]
+
+[node name="ColorRect" type="ColorRect" parent="Level/Background" unique_id=1029186514]
+custom_minimum_size = Vector2(1720, 1000)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -860.0
+offset_top = -500.0
+offset_right = 860.0
+offset_bottom = 500.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.36112815, 0.36112815, 0.36112815, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Level/Background" unique_id=1278412632]
+self_modulate = Color(0.38039216, 0.53333336, 1, 0.13725491)
+scale = Vector2(2.8, 2.8)
+texture = ExtResource("2_eow3j")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Level/Background" unique_id=387718979]
+modulate = Color(0.6156863, 0.78431374, 0.84705883, 1)
+self_modulate = Color(0.51652586, 0.51652557, 0.5165253, 0.78039217)
+texture = ExtResource("3_j5wjh")
 
 [node name="TestCollisions" type="Node2D" parent="Level" unique_id=116089207]
 
@@ -38,6 +65,7 @@ shape = SubResource("RectangleShape2D_o2si4")
 [node name="TestRect" type="ColorRect" parent="Level/TestCollisions/StaticBody2D" unique_id=612328068]
 offset_right = 40.0
 offset_bottom = 40.0
+color = Color(0.28627452, 0.28627452, 0.32156864, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="Level/TestCollisions" unique_id=834249014]
@@ -52,8 +80,18 @@ shape = SubResource("RectangleShape2D_01lti")
 [node name="TestRect" type="ColorRect" parent="Level/TestCollisions/StaticBody2D2" unique_id=1951146451]
 offset_right = 39.0
 offset_bottom = 249.0
+color = Color(0.28627452, 0.28627452, 0.31764707, 1)
 
-[node name="Node2D" type="Node2D" parent="Level" unique_id=34913611]
+[node name="WorldBorder" type="Node2D" parent="Level" unique_id=34913611]
+visible = false
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Level/WorldBorder" unique_id=1931558874]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level/WorldBorder/StaticBody2D" unique_id=668197731]
+position = Vector2(1392.1873, -69.38571)
+polygon = PackedVector2Array(-2599.1873, -809.61426, -2746.1873, 906.38574, 26.812744, 980.38574, -1.1872559, -848.61426, -2193.1873, -742.61426, -2380.1873, -391.6143, -572.18726, -392.6143, -571.18726, 531.38574, -2213.1873, 531.38574, -2210.1873, -768.61426)
 
 [node name="Enemies" type="Node2D" parent="." unique_id=1876228398]
 unique_name_in_owner = true

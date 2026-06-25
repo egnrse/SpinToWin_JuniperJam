@@ -25,10 +25,12 @@ var potents := 2.	## increase rope force with distance**potents
 # values for speed streching
 var pre_angle := self.rotation	## angle of [member self] in the previous tick
 var pre_stretch := 1.0			## stretch multiplier in the previous tick
-@onready var strechObjs := [$DamageArea/DamageShape, $ColorRect, $Sprite2D, $Particles]	## which objects to apply stretching to
+@onready var strechObjs := [$DamageArea/DamageShape, $ColorRect, $Sprite2D, $Particles, $AnimatedSpriteContainer]	## which objects to apply stretching to
 
 # values for enemy collisions
 var pre_pos := self.global_position	## position of [member self] in the previous tick
+
+@onready var animatedSprite := $AnimatedSpriteContainer/AnimatedSprite2D	## the animation sprite
 
 func _physics_process(_delta: float) -> void:
 	# connect self to anker
@@ -136,3 +138,11 @@ func reset() -> void:
 	pre_stretch = 1
 	pre_pos = self.global_position
 	update_stretch(1)
+
+## update animations (react to a change in the [member animate])
+func animateUpdate() -> void:
+	if animate:
+		if not animatedSprite.is_playing():
+			animatedSprite.play( )
+	else:
+		animatedSprite.stop()

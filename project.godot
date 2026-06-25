@@ -11,6 +11,10 @@ config_version=5
 [application]
 
 config/name="SpinToWin (JuniperJam)"
+config/description="A simple retro inspired top down survival game.
+
+SourceCode (MIT License): https://github.com/egnrse/SpinToWin_JuniperJam"
+config/version="V0.1.X"
 run/main_scene="uid://exl2r3ctplyj"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 run/max_fps=120
@@ -24,7 +28,6 @@ buses/default_bus_layout="uid://ctc2jw8cignab"
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
-window/size/resizable=false
 window/stretch/mode="canvas_items"
 
 [dotnet]

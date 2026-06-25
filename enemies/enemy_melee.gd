@@ -7,6 +7,7 @@ extends "res://enemies/_EnemyClass.gd"
 func _ready() -> void:
 	self.init()
 	self.initAudio()
+	self.initAnim()
 	#var pitchRange = 0.4
 	#$AudioStreamPlayer2D.pitch_scale = randf_range(1-pitchRange,1+pitchRange)
 

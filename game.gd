@@ -138,6 +138,8 @@ func spawn_enemy(type="res://enemies/enemy_melee.tscn") -> void:
 func updateAnimate() -> void:
 	player.animate = animate
 	rot.animate = animate
+	player.animateUpdate()
+	rot.animateUpdate()
 	for e in enemyContainer.get_children():
 		if "animate" in e:
 			e.animate = animate
